@@ -21,10 +21,9 @@
 #define LAYAD_CIRCUITS_SALENG_GSM_H
 
 #include "Arduino.h"
-#include <SoftwareSerial.h>
 
+#include <Stream.h>
 #include <SoftwareSerial.h>
-
 enum {
 	SMS_STAGE0 = 0,
 	SMS_STAGE1,
@@ -37,7 +36,7 @@ enum {
 	SMS_STAGE8	
 };
 //#define DEBUG_PRINT_TO_MONITOR
-#define DELAY_BETWEEN_AT_CMNDS 300
+#define DELAY_BETWEEN_AT_CMNDS 800
 #define SMS_INTERVAL 7000 // time between sms transmissions in ms
 #define SMS_FINAL_DELAY_MS 8000 // waiting time before a new SMS can be sent
 #define MAX_PHONENUMBER_LEN 14 // maximum length of the phone number
@@ -62,12 +61,14 @@ public:
 	bool isSMSavailable();
 
 private:
+
 	Stream *mySerial;
-	SoftwareSerial *swSerial;
+	 SoftwareSerial *swSerial;
 	HardwareSerial *hwSerial;
     char _sms_msg[MAX_SMS_SIZE+1];
     char _sms_num[MAX_PHONENUMBER_LEN+1];
-    uint8_t _sms_stage  = SMS_STAGE0;
+    uint8_t _sms_stage;
 	bool smsavailable;
+	
 };
 #endif
