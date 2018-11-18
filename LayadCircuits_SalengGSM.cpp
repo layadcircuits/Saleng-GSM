@@ -76,7 +76,7 @@ bool LayadCircuits_SalengGSM::isFreeToSend()
 
 
 
-void LayadCircuits_SalengGSM:: smsPoller()
+bool LayadCircuits_SalengGSM:: smsPoller()
 {
   unsigned long timer;
   String textData = "";
