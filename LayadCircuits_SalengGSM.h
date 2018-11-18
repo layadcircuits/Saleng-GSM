@@ -54,7 +54,7 @@ public:
 	void sendSMS(char * num, char * msg);
     void smsMachine();
     bool receiveSMS();  
-    void smsPoller();
+    bool smsPoller();
     char smsRxMsg[RECEIVE_BUFFER_SIZE];
     char smsSender[MAX_PHONENUMBER_LEN+1];
 	char * readSMS();
