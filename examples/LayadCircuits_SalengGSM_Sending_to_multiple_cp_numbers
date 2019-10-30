@@ -1,0 +1,46 @@
+#include <LayadCircuits_SalengGSM.h>
+#include <SoftwareSerial.h>
+char input[12];
+String message = "";
+int commaPosition;
+SoftwareSerial gsmSerial(2,3);
+
+LayadCircuits_SalengGSM salengGSM = LayadCircuits_SalengGSM(&gsmSerial);
+
+void setup()
+{
+  salengGSM.begin(9600);
+  Serial.begin(9600);
+  Serial.print(F("Preparing Saleng GSM Shield.Pls wait for 10 seconds..."));
+  delay(10000); 
+  salengGSM.initSalengGSM();
+  Serial.println(F("Done"));
+}
+
+void loop()
+{
+  salengGSM.smsMachine();
+  if(salengGSM.isFreeToSend())
+  { 
+      while (Serial.available() > 0) {
+        char inChar = Serial.read();
+        message += inChar;
+      }      
+      commaPosition = message.indexOf(',');
+       if(commaPosition != -1)
+       {
+          Serial.println(message.substring(0,commaPosition));
+          message.substring(0,commaPosition).toCharArray(input,12);
+          message = message.substring(commaPosition+1, message.length()); 
+          if(input) {
+            salengGSM.sendSMS(input, "Hi, this is a test SMS from the Layad Circuits' Saleng GSM Shield. Have a nice day!");
+          }
+          delay(1000);        
+      }
+      else
+      { 
+          if(message.length() > 0)
+          Serial.println(message);
+      }      
+  }
+}
