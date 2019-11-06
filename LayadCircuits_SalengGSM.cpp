@@ -108,7 +108,7 @@ bool LayadCircuits_SalengGSM:: smsPoller()
 
  char *ptr = strstr(smsRxMsg,"+CMT:");
  
- if(!strstr(smsRxMsg,"+CMT:")) return; // not an SMS
+ if(!strstr(smsRxMsg,"+CMT:")) return false; // not an SMS
  else smsavailable = true;
  
   // only acquire numeric data.
@@ -137,6 +137,8 @@ bool LayadCircuits_SalengGSM:: smsPoller()
   initSalengGSM();
   delay(DELAY_BETWEEN_AT_CMNDS);
   mySerial->print(F("AT+CMGDA=\"DEL ALL\"\r\n")); 
+	
+return true;
 }
 
 
