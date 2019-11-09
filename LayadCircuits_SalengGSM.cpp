@@ -90,6 +90,9 @@ bool LayadCircuits_SalengGSM:: smsPoller()
       if(mySerial->available())
       {
         char inData = mySerial->read();
+	#ifdef DEBUG_DISPLAY_ALL_RESPONSE
+	   Serial.write(inData);      
+	#endif
         textData += inData;
       }
   } 
