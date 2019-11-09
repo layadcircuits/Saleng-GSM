@@ -36,6 +36,7 @@ enum {
 	SMS_STAGE8	
 };
 //#define DEBUG_PRINT_TO_MONITOR
+//DEBUG_DISPLAY_ALL_RESPONSE
 #define DELAY_BETWEEN_AT_CMNDS 800
 #define SMS_INTERVAL 7000 // time between sms transmissions in ms
 #define SMS_FINAL_DELAY_MS 8000 // waiting time before a new SMS can be sent
